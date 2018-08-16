@@ -1,0 +1,34 @@
+﻿[
+  {
+    "name": "China",
+    "population": 1359821000,
+    "flagURL": "//upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
+    "capital": "Beijing",
+    "gdp": 12261,
+    "description": "Area controlled by the People's Republic of China shown in dark green; claimed but uncontrolled regions shown in light green. China, officially the People's Republic of China (PRC), is a unitary one-party sovereign state in East Asia and the world's most populous country, with a population of around 1.404 billion."
+  },
+  {
+    "name": "India",
+    "population": 1205625000,
+    "flagURL": "//upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
+    "capital": "New Delhi",
+    "gdp": 4716,
+    "description": "India is a federation with a parliamentary system governed under the Constitution of India, which serves as the country's supreme legal document. It is a constitutional republic and representative democracy, in which \"majority rule is tempered by minority rights protected by law\".  It is a constitutional republic and representative democracy, in which \"majority rule is tempered by minority rights protected by law\""
+  },
+  {
+    "name": "United States of America",
+    "population": 312247000,
+    "flagURL": "//upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
+    "capital": "Washington, D.C.",
+    "gdp": 16244,
+    "description": "The United States of America is a North American nation that is the world's most dominant economic and military power. Likewise, its cultural imprint spans the world, led in large part by its popular culture expressed in music, movies and television."
+  },
+  {
+    "name": "Philippines",
+    "population": 1,
+    "flagURL": "//upload.wikimedia.org/wikipedia/commons/9/99/Flag_of_the_Philippines.svg",
+    "capital": "MNL48",
+    "gdp": 0,
+    "description": "Philippines: An overview. The Philippines is a tropical country in Pacific Ocean, blessed with beautiful natural landscapes - and active volcanoes and extreme weather patterns. The Philippines, consisting of some 7,107 islands, is located in the western Pacific Ocean. Taiwan lies to its north, and Vietnam to the west"
+  }
+]

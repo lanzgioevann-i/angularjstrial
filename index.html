@@ -1,0 +1,104 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <title>Angular.js Example</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <script>
+        var visited = [];
+        var app = angular.module('bodyApp', ['ngRoute', 'ngAnimate']);
+        app.config(function ($routeProvider, $locationProvider) {
+            $routeProvider
+                .when('/', {
+                    templateUrl: 'home.html',
+                    controller: 'homeController'
+                })
+                .when('/:countryName', {
+                    templateUrl: 'template.html',
+                    controller: 'loadController'
+                })
+                .otherwise({
+                    redirectTo: '/'
+                });
+
+
+            $locationProvider.html5Mode(true);
+        });
+
+        app.controller('homeController', function ($scope, $http) {
+            $http.get('countries.json').success(function (data) {
+                console.log("home controller");
+                $scope.countries = data;
+            });
+        });
+
+        app.controller('loadController', function ($scope, $http, $routeParams) {
+            $http.get('countries.json').success(function (data) {
+
+                var filteredData;
+                var loop = 0;
+                data.forEach(function () {
+                    var item = data[loop];
+                    if (item.name == $routeParams.countryName) {
+                        filteredData = item;
+                    }
+                    loop++;
+                })
+
+                $scope.country = filteredData;
+
+                //preloader
+                if (visited.includes(filteredData.name)) {
+                    $('#mainPage').hide();
+                    setTimeout(function () {
+                        $('#mainPage').fadeIn(500);
+                    }, 100);
+                }
+                else {
+                    $('#mainPage').hide();
+                    setTimeout(function () {
+                        $('#mainPage').fadeIn(500);
+                        visited.push(filteredData.name);
+                    }, 1000);
+                }
+                
+            });
+        });
+
+        app.controller('linksController', function ($scope, $http) {
+            $http.get('countries.json').success(function (data) {
+                console.log("links controller");
+                console.log(data);
+                $scope.countries = data;
+            });
+        });
+
+    </script>
+
+</head>
+<body ng-app="bodyApp">
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Logo</a>
+
+            <ul id="nav-mobile" class="right hide-on-med-and-down" ng-controller="linksController">
+                <li><a href="/#/">Home</a></li>
+                <li ng-repeat="country in countries"><a href="/#/{{country.name}}">{{country.name}}</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="mainPage">
+        <div ng-view></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</body>
+</html>
