@@ -1,7 +1,6 @@
 ﻿<html>
 <head>
     <meta charset="utf-8">
-    <base href="/">
 
     <title>Angular.js Example</title>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"
@@ -31,7 +30,7 @@
                     redirectTo: '/'
                 });
 
-            $locationProvider.html5Mode(true);
+            //$locationProvider.html5Mode(true);
         });
 
         app.controller('homeController', function ($scope, $http) {
