@@ -1,6 +1,8 @@
 ﻿<html>
 <head>
     <meta charset="utf-8">
+    <base href="/">
+
     <title>Angular.js Example</title>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"
             integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="
@@ -29,7 +31,7 @@
                     redirectTo: '/'
                 });
 
-            //$locationProvider.html5Mode(true);
+            $locationProvider.html5Mode(true);
         });
 
         app.controller('homeController', function ($scope, $http) {
@@ -68,7 +70,7 @@
                         visited.push(filteredData.name);
                     }, 1000);
                 }
-                
+
             });
         });
 
