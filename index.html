@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
     <script>
+
+        $('#mainPage').hide();
+
         var visited = [];
         var app = angular.module('bodyApp', ['ngRoute', 'ngAnimate']);
         app.config(function ($routeProvider, $locationProvider) {
@@ -37,6 +40,16 @@
             $http.get('countries.json').success(function (data) {
                 console.log("home controller");
                 $scope.countries = data;
+
+                $('#preloader').removeClass('hide');
+                $('#preloader').fadeIn(100);
+
+                $('#mainPage').hide();
+
+                setTimeout(function () {
+                    $('#preloader').fadeOut(500);
+                    $('#mainPage').fadeIn(500);
+                }, 1000);
             });
         });
 
@@ -54,19 +67,31 @@
                 })
 
                 $scope.country = filteredData;
+                
 
                 //preloader
                 if (visited.includes(filteredData.name)) {
+                    $('#preloader').removeClass('hide');
+                    $('#preloader').fadeIn(100);
+
                     $('#mainPage').hide();
+
                     setTimeout(function () {
+                        $('#preloader').fadeOut(500);
                         $('#mainPage').fadeIn(500);
                     }, 100);
                 }
                 else {
+                    visited.push(filteredData.name);
+
+                    $('#preloader').removeClass('hide');
+                    $('#preloader').fadeIn(100);
+
                     $('#mainPage').hide();
+
                     setTimeout(function () {
+                        $('#preloader').fadeOut(500);
                         $('#mainPage').fadeIn(500);
-                        visited.push(filteredData.name);
                     }, 1000);
                 }
 
@@ -76,8 +101,8 @@
         app.controller('linksController', function ($scope, $http) {
             $http.get('countries.json').success(function (data) {
                 console.log("links controller");
-                console.log(data);
                 $scope.countries = data;
+
             });
         });
 
@@ -86,18 +111,25 @@
 </head>
 <body ng-app="bodyApp">
 
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
-
-            <ul id="nav-mobile" class="right hide-on-med-and-down" ng-controller="linksController">
-                <li><a href="#/">Home</a></li>
-                <li ng-repeat="country in countries"><a href="#/{{country.name}}">{{country.name}}</a></li>
-            </ul>
+    <div class="container" style="">
+        <div id="preloader" class="hide center valign-wrapper" style="position: fixed; min-height: 100vh;">
+            <h1>Loading</h1>
         </div>
-    </nav>
+    </div>
+    <div id="mainPage" style="min-height: 110vh;">
 
-    <div id="mainPage">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Logo</a>
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down" ng-controller="linksController">
+                    <li><a href="#/">Home</a></li>
+                    <li ng-repeat="country in countries"><a href="#/{{country.name}}">{{country.name}}</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
         <div ng-view></div>
     </div>
 
